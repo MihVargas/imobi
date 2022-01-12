@@ -13,7 +13,7 @@
   <div class="row">
     <div class="col-md-3 sidebar">
       <div class="logo_sidebar">
-        <h2 class="logo"><img class="img_logo_sidebar" src="" />IMOBI</h2>
+        <h2 class="logo"><img class="img_logo_sidebar" src="{% static 'autenticacao/img/logo.png' %}" />IMOBI</h2>
       </div>
       <div class="corpo_sidebar">
         <div>
@@ -26,14 +26,22 @@
           </p>
           <br />
           <br />
-          <a class="btn_logar" href="">LOGAR</a>
+          <a class="btn_logar" href="{% url 'logar' %}">LOGAR</a>
         </div>
       </div>
     </div>
     <div class="col-md-9">
       <div class="area_cadastrar">
-        <form action="" method="">
+        <form action="{% url 'cadastro'%}" method="POST">{% csrf_token %}
           <h2 class="titulo_area_cadastrar">Cadastre-se</h2>
+
+          {% if messages %}
+            {% for message in messages %}
+              <div class="alert {{message.tags}}">
+                {{message}}
+              </div>
+            {% endfor %}
+          {% endif %}
           <br />
           <input
             name="username"
